@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "legallens-ai"
+version = "1.0.0"
+description = "LegalLens AI — Indian Legal Problem Analyzer (OpenEnv)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "LegalLens AI" }
+]
+keywords = ["openenv", "legal", "india", "law", "access-to-justice"]
+dependencies = [
+    "pydantic>=2.0.0",
+    "openai>=1.0.0",
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "python-multipart>=0.0.6",
+    "httpx>=0.25.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "httpx"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[project.scripts]
+legallens = "inference:main"
+
+[tool.openenv]
+name = "LegalLensEnv"
+version = "1.0.0"
+entry_point = "app:app"
+inference_script = "inference.py"
+tasks = ["task_1_easy", "task_2_medium", "task_3_hard"]
