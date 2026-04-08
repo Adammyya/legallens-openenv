@@ -1,6 +1,4 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
-[build-system]
 requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
@@ -15,6 +13,7 @@ authors = [
     { name = "Adammyya" }
 ]
 keywords = ["openenv", "legal", "india", "law", "access-to-justice"]
+
 dependencies = [
     "openenv>=0.1.0",
     "pydantic>=2.0.0",
@@ -25,10 +24,9 @@ dependencies = [
     "httpx>=0.25.0",
 ]
 
-[tool.setuptools]
-packages = ["."]
-[tool.setuptools.package-dir]
-"" = "."
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
 
 [tool.openenv]
 name = "LegalLensEnv"
