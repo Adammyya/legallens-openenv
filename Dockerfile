@@ -16,7 +16,8 @@ RUN pip install --no-cache-dir --upgrade pip \
 COPY --chown=user:user . .
 
 # Create __init__ files for subdirs
-RUN touch laws/__init__.py tasks/__init__.py
+
+RUN mkdir -p laws tasks && touch laws/__init__.py tasks/__init__.py
 
 USER user
 EXPOSE 7860
