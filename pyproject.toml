@@ -24,9 +24,16 @@ dependencies = [
     "httpx>=0.25.0",
 ]
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["*"]
+[tool.setuptools]
+py-modules = [
+    "app",
+    "environment",
+    "models",
+    "grader",
+    "client",
+    "baseline_agent",
+    "inference"
+]
 
 [tool.openenv]
 name = "LegalLensEnv"
