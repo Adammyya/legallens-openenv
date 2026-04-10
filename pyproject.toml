@@ -42,7 +42,7 @@ py-modules = [
 [tool.openenv]
 name = "LegalLensEnv"
 version = "1.0.0"
-entry_point = "app:app"
+entry_point = "server.app:app"
 inference_script = "inference.py"
 tasks = ["task_1_easy", "task_2_medium", "task_3_hard"]
 deploy_mode = ["docker", "huggingface"]
