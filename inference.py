@@ -118,8 +118,8 @@ def run_task(task_id: str) -> dict:
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), "laws"))
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), "tasks"))
 
-    from environment import LegalLensEnv
-    from models import (
+    from legallens_openenv.environment import LegalLensEnv
+    from legallens_openenv.models import (
         Action, ActionType, LegalDomain, LegalAction,
         Jurisdiction, LawReference
     )

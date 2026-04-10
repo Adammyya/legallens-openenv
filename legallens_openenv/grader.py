@@ -6,7 +6,7 @@ Score range: 0.0 – 1.0
 
 from __future__ import annotations
 from typing import Any, Dict, List, Optional, Tuple
-from models import Action, ActionType, Reward
+from legallens_openenv.models import Action, ActionType, Reward
 
 
 # ─────────────────────────────────────────────

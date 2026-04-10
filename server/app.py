@@ -1,7 +1,6 @@
 """
 LegalLens AI — FastAPI Server
-HuggingFace Spaces compatible REST API.
-OpenEnv compliant endpoints.
+OpenEnv compliant API
 """
 
 from __future__ import annotations
@@ -22,8 +21,7 @@ from tasks.task_definitions import ALL_TASKS
 
 app = FastAPI(
     title="LegalLens AI",
-    description="Indian Legal Problem Analyzer — OpenEnv API",
-    version="1.0.0",
+    version="1.0.0"
 )
 
 app.add_middleware(
@@ -148,12 +146,12 @@ def get_state(session_id: str):
     return {"state": SESSIONS[session_id].state().model_dump()}
 
 
-
+# REQUIRED ENTRY POINT
 def main():
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=7860)
 
 
-
+# for local run
 if __name__ == "__main__":
     main()

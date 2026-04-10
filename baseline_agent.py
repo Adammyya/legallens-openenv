@@ -26,8 +26,8 @@ except ImportError:
     print("ERROR: pip install openai")
     sys.exit(1)
 
-from environment import LegalLensEnv
-from models import (
+from legallens_openenv.environment import LegalLensEnv
+from legallens_openenv.models import (
     Action, ActionType, LegalDomain, LegalAction,
     Jurisdiction, LawReference
 )

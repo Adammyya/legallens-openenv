@@ -13,12 +13,12 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "tasks"))
 
 from typing import Any, Dict, List, Optional, Tuple
 
-from models import (
+from legallens_openenv.models import (
     Action, ActionType, EpisodeState, LegalDomain,
     LawReference, Observation, Reward
 )
 from tasks.task_definitions import ALL_TASKS
-from grader import compute_step_reward, grade_episode
+from legallens_openenv.grader import compute_step_reward, grade_episode
 from laws.knowledge_base import (
     LAW_DATABASE, EVIDENCE_CHECKLISTS,
     JURISDICTION_MAP, LIMITATION_PERIODS
