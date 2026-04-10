@@ -6,7 +6,7 @@ Each has a real appellant problem statement + gold standard answer.
 
 from __future__ import annotations
 from typing import Any, Dict, List
-from models import AppellantProblem, LegalDomain, LegalAction, Jurisdiction
+from legallens_openenv.models import AppellantProblem, LegalDomain, LegalAction, Jurisdiction
 
 
 # ─────────────────────────────────────────────

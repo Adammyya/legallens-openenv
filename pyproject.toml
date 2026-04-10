@@ -24,6 +24,11 @@ dependencies = [
     "httpx>=0.25.0",
 ]
 
+# 🚨 CRITICAL (THIS WAS MISSING)
+[project.scripts]
+openenv-server = "app:main"
+
+# For flat file structure (your case)
 [tool.setuptools]
 py-modules = [
     "app",
@@ -42,6 +47,3 @@ entry_point = "app:app"
 inference_script = "inference.py"
 tasks = ["task_1_easy", "task_2_medium", "task_3_hard"]
 deploy_mode = ["docker", "huggingface"]
-
-[tool.dummy]
-test = "force-refresh"
