@@ -28,11 +28,9 @@ dependencies = [
 [project.scripts]
 openenv-server = "server.app:main"
 
-# For flat file structure (your case)
 [tool.setuptools]
 packages = ["server"]
 py-modules = [
-    "app",
     "environment",
     "models",
     "grader",
