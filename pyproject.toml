@@ -30,6 +30,7 @@ openenv-server = "server.app:main"
 
 [tool.setuptools]
 packages = ["server"]
+package-dir = {"" = "."}
 py-modules = [
     "environment",
     "models",
