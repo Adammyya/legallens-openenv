@@ -1,5 +1,6 @@
 name: LegalLensEnv
 version: "1.0.0"
+app: server.app:app
 description: >
   LegalLens AI — Indian Legal Problem Analyzer.
   An AI agent listens to a common person's legal problem in plain language,
@@ -14,7 +15,6 @@ tags:
   - law
   - access-to-justice
   - real-world
-  - nlp
 
 real_world_task: true
 domain: legal / access to justice / civic tech
@@ -24,10 +24,9 @@ tasks:
     name: "Online Shopping Fraud"
     difficulty: easy
     description: >
-      Appellant paid ₹15,000 for a phone via UPI to a fake website.
-      Product never arrived. Website now offline. Agent must identify:
+      Appellant paid 15000 for a phone via UPI to a fake website.
+      Product never arrived. Website now offline. Agent must identify
       IT Act 66D + IPC 420 + Consumer Protection Act.
-      Primary action: cybercrime.gov.in complaint.
     max_steps: 12
     baseline_score: 0.78
 
@@ -38,7 +37,7 @@ tasks:
       Female employee facing workplace sexual harassment from manager.
       HR ignored complaint. Manager threatened her job.
       Salary withheld for one month.
-      Multiple overlapping laws: POSH Act + Payment of Wages Act + IPC 506.
+      Multiple overlapping laws POSH Act + Payment of Wages Act + IPC 506.
     max_steps: 18
     baseline_score: 0.63
 
@@ -46,73 +45,28 @@ tasks:
     name: "Builder Fraud + Counter Legal Notice"
     difficulty: hard
     description: >
-      ₹45 lakh flat — 3 years no possession. Hidden clause in agreement.
+      45 lakh flat — 3 years no possession. Hidden clause in agreement.
       Builder sent defamation legal notice when appellant complained.
-      Home loan EMI ongoing. Multiple forums: RERA + Consumer Forum + Criminal.
-      Agent must also advise on handling counter notice.
+      Home loan EMI ongoing. Multiple forums RERA + Consumer Forum + Criminal.
     max_steps: 25
     baseline_score: 0.51
 
 observation_space:
   type: structured
   model: Observation (Pydantic)
-  fields:
-    - problem: AppellantProblem (statement, keywords, amount, parties, urgency)
-    - classified_domain: string (criminal/civil/consumer/labour/cyber/property)
-    - identified_laws: list of LawReference (act, section, description, strength)
-    - ranked_violations: list of ranked law references
-    - recommended_actions: list of legal actions
-    - jurisdiction: string (which court/forum)
-    - evidence_checklist: list of required documents
-    - limitation_status: filing deadline info
-    - last_action_feedback: string
-    - step_number: int
-    - steps_remaining: int
-    - task_hint: string
 
 action_space:
   type: structured
   model: Action (Pydantic)
-  action_types:
-    - classify_domain: Identify legal domain
-    - identify_law: Map to specific Indian law sections
-    - rank_violation: Rank violations by legal strength
-    - recommend_action: Suggest FIR/Consumer Forum/RERA/etc.
-    - find_jurisdiction: Identify correct court or authority
-    - list_evidence: Documents appellant must collect
-    - check_limitation: Verify filing deadline
-    - ask_clarification: Request more info from appellant
-    - escalate: Suggest next forum if current fails
 
 reward:
   type: continuous
-  range: [-0.3, 1.0] per step
+  range: [-0.3, 1.0]
   episode_range: [0.0, 1.0]
-  components:
-    domain_accuracy: Correct legal domain (weight 20%)
-    law_identification: Correct sections identified (weight 35%)
-    action_correctness: Right legal action recommended (weight 25%)
-    jurisdiction_match: Correct court/forum (weight 10%)
-    evidence_quality: Complete evidence checklist (weight 10%)
-    penalty: Wrong law identification (-0.08 each)
-
-laws_covered:
-  - IPC 420 (Cheating/Fraud)
-  - IPC 406 (Breach of Trust)
-  - IPC 506 (Criminal Intimidation)
-  - IPC 498A (Domestic Violence)
-  - IPC 354 (Molestation)
-  - IPC 500 (Defamation)
-  - Consumer Protection Act 2019
-  - IT Act 2000 (66, 66C, 66D, 67)
-  - POSH Act 2013
-  - Payment of Wages Act 1936
-  - RERA 2016 (S.12, S.18)
 
 disclaimer: >
   LegalLens AI provides informational analysis only.
-  It does not constitute legal advice.
-  Users should consult a qualified lawyer for their specific situation.
+  Not legal advice. Consult a qualified lawyer.
 
 dependencies:
   python: ">=3.10"
