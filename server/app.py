@@ -1,10 +1,15 @@
 """
-LegalLens AI — FastAPI Server
-OpenEnv compliant API
+LegalLens AI — Server Entry Point
+OpenEnv compliant API - server/app.py
 """
 
 from __future__ import annotations
+import sys
+import os
 import uuid
+
+# Add parent directory to path so we can import from root
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from typing import Dict
 from fastapi import FastAPI, HTTPException, Request
@@ -146,12 +151,16 @@ def get_state(session_id: str):
     return {"state": SESSIONS[session_id].state().model_dump()}
 
 
-# REQUIRED ENTRY POINT
+# REQUIRED ENTRY POINT — openenv-server = "server.app:main"
 def main():
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=7860)
+    uvicorn.run(
+        "server.app:app",
+        host="0.0.0.0",
+        port=7860,
+        reload=False
+    )
 
 
-# for local run
 if __name__ == "__main__":
     main()
