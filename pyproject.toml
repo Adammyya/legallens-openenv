@@ -25,9 +25,20 @@ dependencies = [
 [project.scripts]
 openenv-server = "server.app:main"
 
+[tool.setuptools]
+py-modules = [
+    "environment",
+    "models",
+    "grader",
+    "app",
+    "inference",
+    "baseline_agent",
+    "client",
+]
+
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["server*", "laws*", "tasks*"]
+include = ["server*", "laws*", "tasks*", "legallens_openenv*"]
 
 [tool.openenv]
 name = "LegalLensEnv"
