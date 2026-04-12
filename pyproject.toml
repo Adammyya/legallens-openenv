@@ -23,7 +23,7 @@ dependencies = [
 ]
 
 [project.scripts]
-server = "server.app:main"
+openenv-server = "server.app:main"
 
 [tool.setuptools]
 py-modules = [
