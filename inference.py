@@ -100,8 +100,8 @@ def get_llm_action(messages: list) -> dict:
 def run_task(task_id: str) -> dict:
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-    from environment import LegalLensEnv
-    from models import (
+    from legallens_openenv.environment import LegalLensEnv
+    from legallens_openenv.models import (
         Action, ActionType, LegalDomain, LegalAction,
         Jurisdiction, LawReference
     )
@@ -234,11 +234,14 @@ def run_task(task_id: str) -> dict:
 # Main — runs all 3 tasks
 # ─────────────────────────────────────────────
 
-if __name__ == "__main__":
+def main():
     task_ids = ["task_1_easy", "task_2_medium", "task_3_hard"]
-
     for task_id in task_ids:
         try:
             run_task(task_id)
         except Exception as e:
             print(f"[END] success=false steps=0 score=0.00 rewards=", flush=True)
+
+
+if __name__ == "__main__":
+    main()
