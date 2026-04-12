@@ -1,6 +1,6 @@
 name: LegalLensEnv
 version: "1.0.0"
-app: server.app:app
+app: server.app:app        
 description: >
   LegalLens AI — Indian Legal Problem Analyzer.
   An AI agent listens to a common person's legal problem in plain language,
