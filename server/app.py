@@ -151,7 +151,7 @@ def get_state(session_id: str):
     return {"state": SESSIONS[session_id].state().model_dump()}
 
 
-# REQUIRED ENTRY POINT — openenv-server = "server.app:main"
+# REQUIRED ENTRY POINT — server = "server.app:main"
 def main():
     import uvicorn
     uvicorn.run(
