@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "tasks"))
 
 from typing import Any, Dict, List, Optional, Tuple
 
-from models import import (
+from models import (
     Action, ActionType, EpisodeState, LegalDomain,
     LawReference, Observation, Reward
 )
