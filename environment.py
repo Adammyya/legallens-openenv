@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "tasks"))
 
 from typing import Any, Dict, List, Optional, Tuple
 
-from legallens_openenv.models import (
+from models import import (
     Action, ActionType, EpisodeState, LegalDomain,
     LawReference, Observation, Reward
 )
