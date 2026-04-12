@@ -234,11 +234,14 @@ def run_task(task_id: str) -> dict:
 # Main — runs all 3 tasks
 # ─────────────────────────────────────────────
 
-if __name__ == "__main__":
+def main():
     task_ids = ["task_1_easy", "task_2_medium", "task_3_hard"]
-
     for task_id in task_ids:
         try:
             run_task(task_id)
         except Exception as e:
             print(f"[END] success=false steps=0 score=0.00 rewards=", flush=True)
+
+
+if __name__ == "__main__":
+    main()
