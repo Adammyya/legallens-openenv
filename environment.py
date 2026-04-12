@@ -4,7 +4,6 @@ OpenEnv-compliant: step() / reset() / state()
 """
 
 from __future__ import annotations
-import copy
 import sys
 import os
 
@@ -22,10 +21,6 @@ from models import (
 
 from tasks.task_definitions import ALL_TASKS
 from grader import compute_step_reward, grade_episode
-from laws.knowledge_base import (
-    LAW_DATABASE, EVIDENCE_CHECKLISTS,
-    JURISDICTION_MAP, LIMITATION_PERIODS
-)
 
 
 class LegalLensEnv:
@@ -40,6 +35,7 @@ class LegalLensEnv:
 
     def reset(self) -> Observation:
         cfg = self._task_cfg
+
         self._state = EpisodeState(
             task_id=cfg["task_id"],
             task_name=cfg["name"],
@@ -51,17 +47,13 @@ class LegalLensEnv:
             done=False,
         )
 
-        return self._build_observation(
-            f"New case received.\n\nProblem:\n{cfg['problem'].statement}"
-        )
+        return self._build_observation("New case started.")
 
     def step(self, action: Action) -> Tuple[Observation, Reward, bool, Dict[str, Any]]:
         s = self._state
         gold = self._task_cfg["gold"]
 
         s.step_count += 1
-
-        feedback = self._apply_action(action, s)
 
         reward = compute_step_reward(action, gold, self._state_dict(s))
         s.total_reward += reward.total
@@ -82,39 +74,13 @@ class LegalLensEnv:
                 max_steps=self._task_cfg["max_steps"],
             )
             info["final_score"] = grade["final_score"]
-            feedback += f"\nFinal Score: {grade['final_score']}"
 
-        return self._build_observation(feedback), reward, done, info
+        return self._build_observation("Step processed"), reward, done, info
 
     def state(self) -> EpisodeState:
         return self._state
 
-    # ───────── helpers ─────────
-
-    def _apply_action(self, action: Action, s: EpisodeState) -> str:
-        atype = action.action_type
-
-        if atype == ActionType.CLASSIFY_DOMAIN:
-            s.classified_domain = action.domain
-            return f"Domain classified: {action.domain}"
-
-        elif atype == ActionType.IDENTIFY_LAW:
-            s.identified_laws = [l.model_dump() for l in action.laws]
-            return "Laws identified."
-
-        elif atype == ActionType.RECOMMEND_ACTION:
-            s.recommended_actions.append(action.legal_action)
-            return f"Action: {action.legal_action}"
-
-        elif atype == ActionType.FIND_JURISDICTION:
-            s.jurisdiction = action.jurisdiction
-            return f"Jurisdiction: {action.jurisdiction}"
-
-        elif atype == ActionType.LIST_EVIDENCE:
-            s.evidence_checklist = action.evidence_items
-            return "Evidence listed."
-
-        return "Action applied."
+    # ---------- helpers ----------
 
     def _is_complete(self, s: EpisodeState) -> bool:
         return (
@@ -142,6 +108,7 @@ class LegalLensEnv:
 
     def _build_observation(self, feedback: str) -> Observation:
         s = self._state
+
         return Observation(
             problem=s.problem,
             classified_domain=s.classified_domain,
